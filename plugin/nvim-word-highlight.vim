@@ -14,3 +14,8 @@ exe "lua package.path = package.path .. ';/lua-?/init.lua'"
 command! -nargs=0 HighlightWordUnderCursor lua require("nvim-word-highlight").highlight_word_under_cursor()
 command! -nargs=0 OpenPathUnderCursor lua require("nvim-word-highlight").open_path_under_cursor()
 
+augroup NvimWordHighlight
+    autocmd! CursorMoved,CursorMovedI * call HighlightWordUnderCursor()
+augroup END
+
+nmap <leader>a :call OpenPathUnderCursor()<CR>
