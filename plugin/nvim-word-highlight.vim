@@ -15,7 +15,15 @@ command! -nargs=0 HighlightWordUnderCursor lua require("nvim-word-highlight").hi
 command! -nargs=0 OpenPathUnderCursor lua require("nvim-word-highlight").open_path_under_cursor()
 
 augroup NvimWordHighlight
-    autocmd! CursorMoved,CursorMovedI * call HighlightWordUnderCursor()
+    autocmd! CursorMoved,CursorMovedI * HighlightWordUnderCursor
 augroup END
 
-nmap <leader>a :call OpenPathUnderCursor()<CR>
+nmap <leader>a :OpenPathUnderCursor<CR>
+
+if !highlight_exists('NvimWordHighlight')
+    hi! link NvimWordHighlight search
+endif
+
+if !highlight_exists('NvimWordHighlightPath')
+    hi! link NvimWordHighlightPath search
+endif
